@@ -1,0 +1,14 @@
+#sidebar {
+  position: relative;
+  height: calc(100vh - 60px);
+  border-right: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+#sidebar-list {
+  margin-left: 0;
+}
+
+.list-group-item {
+  font-family: 'Pretendard-SemiBold';
+  border: transparent;
+}
