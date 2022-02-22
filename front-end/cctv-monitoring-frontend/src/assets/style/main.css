@@ -13,6 +13,10 @@
   font-style: normal;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 #app {
   font-family: 'Pretendard-Light', 'Pretendard-SemiBold';
   -webkit-font-smoothing: antialiased;
@@ -20,10 +24,45 @@
   color: #2c3e50;
 }
 
-h1, h2, h3, h4, h5 {
+#index-content-body {
+  margin-left: 16%;
+}
+
+h1, h2, h3, h4, h5, .btn, th, label {
   font-family: 'Pretendard-SemiBold';
 }
 
+li {
+  list-style-type: none;
+}
+
 .content-body {
+  margin-top: 60px;
   padding: 30px 40px;
+}
+
+.row {
+  margin: 0;
+}
+
+.title-section {
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.title, .sub-title {
+  position: relative;
+  display: inline;
+}
+
+.sub-title {
+  margin-left: 20px;
+  vertical-align: bottom;
+}
+
+@media screen and (max-width: 1020px) {
+  #index-content-body {
+    margin-left: 30%;
+  }
 }

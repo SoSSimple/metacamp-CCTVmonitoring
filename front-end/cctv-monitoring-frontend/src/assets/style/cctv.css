@@ -1,0 +1,37 @@
+#select-section {
+  /* width: 200px; */
+  flex-grow: 0.2;
+}
+
+#cctv-section {
+  height: min-content;
+}
+
+.cctv-cards {
+  height: 100%;
+}
+
+.cctv-card + .cctv-card {
+  margin-top: 30px;
+}
+
+.badge-recording {
+  position: absolute;
+  display: flex;
+  width: 80px;
+  height: 25px;
+  top: 1.25rem;
+  right: 1.25rem;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 1020px) {
+  #title-select-section {
+    flex-direction: column;
+  }
+
+  #select-section {
+    flex-grow: 1;
+  }
+}

@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-container fluid class="title-section">
-      <h1 class="title">부서 관리</h1>
+      <h1 class="title">사용자 관리</h1>
     </b-container>
 
     <b-container fluid>
@@ -14,7 +14,7 @@
           </b-input-group>
         </b-col>
 
-        <b-button variant="primary">부서 등록</b-button>
+        <b-button variant="primary">사용자 등록</b-button>
       </b-row>
 
       <!-- table section -->
@@ -38,9 +38,11 @@ export default {
     return {
       fields: [
         { key: 'id', label: 'id' },
-        { key: 'name', label: '부서 이름' },
-        { key: 'manager', label: '부서 담당자' },
-        { key: 'member', label: '인원' },
+        { key: 'departmentId', label: '부서id' },
+        { key: 'name', label: '이름' },
+        // { key: 'password', label: '비밀번호' },
+        { key: 'phone', label: '내선번호' },
+        { key: 'permission', label: '관리자 권한' },
         { key: 'createdAt', label: '생성일' },
         { key: 'updateBtn', label: '수정' },
         { key: 'deleteBtn', label: '삭제' }

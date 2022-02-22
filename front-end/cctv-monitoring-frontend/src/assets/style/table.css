@@ -1,0 +1,12 @@
+.search-add-section {
+  width: 100%;
+  justify-content: space-between; 
+}
+
+.search-input {
+  max-width: 300px;
+}
+
+.table-section {
+  margin-top: 20px
+}

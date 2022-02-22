@@ -1,7 +1,8 @@
 <template>
   <div>
     <b-container fluid class="title-section">
-      <h1 class="title">부서 관리</h1>
+      <h1 class="title">설비 관리</h1>
+      <h4 class="sub-title">설비 리스트</h4>
     </b-container>
 
     <b-container fluid>
@@ -14,12 +15,16 @@
           </b-input-group>
         </b-col>
 
-        <b-button variant="primary">부서 등록</b-button>
+        <b-button variant="primary">설비 등록</b-button>
       </b-row>
 
       <!-- table section -->
       <b-row class="table-section">
         <b-table small head-variant="light" :items="fields" :fields="fields">
+          <template #cell(cctvToggle)="row">
+            <b-badge variant="success">ON {{ row.cctvToggle }}</b-badge>
+            <b-badge variant="danger">OFF {{ row.cctvToggle }}</b-badge>
+          </template>
           <template #cell(updateBtn)="row">
             <b-button size="sm" variant="primary">수정 {{ row.id }}</b-button>
           </template>
@@ -38,9 +43,12 @@ export default {
     return {
       fields: [
         { key: 'id', label: 'id' },
-        { key: 'name', label: '부서 이름' },
-        { key: 'manager', label: '부서 담당자' },
-        { key: 'member', label: '인원' },
+        { key: 'name', label: '이름' },
+        { key: 'registeration', label: '등록번호' },
+        { key: 'description', label: '설비 설명' },
+        { key: 'temperature', label: '설비 온도' },
+        { key: 'humidity', label: '설비 습도' },
+        { key: 'cctvToggle', label: 'CCTV ON / OFF' },
         { key: 'createdAt', label: '생성일' },
         { key: 'updateBtn', label: '수정' },
         { key: 'deleteBtn', label: '삭제' }
@@ -50,4 +58,4 @@ export default {
 }
 </script>
 
-<style src="../../assets/style/table.css"></style>
+<style src="../../../assets/style/table.css"></style>

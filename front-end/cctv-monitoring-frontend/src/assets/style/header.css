@@ -1,9 +1,19 @@
-header {
-  box-sizing: border-box;
+nav {
+  position: fixed !important;
+  width: 100%;
   height: 60px;
-  padding: 20px 40px;
-  text-align: right;
+  z-index: 10;
+  background-color: #fff;
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.navbar h1 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.navbar h1::after {
+  content: " 님, 안녕하세요.";
 }
 
 #userid-header {
