@@ -19,7 +19,16 @@
 
       <!-- table section -->
       <b-row class="table-section">
-        <b-table small head-variant="light" :items="fields" :fields="fields">
+        <b-table small head-variant="light" :items="items" :fields="fields">
+          <!-- checkbox section -->
+          <template #head(select)="row">
+            <b-form-checkbox v-model="allSelected" @change="toggleAll">{{ row.id }}</b-form-checkbox>
+          </template>
+          <template #cell(select)="row">
+            <b-form-checkbox v-model="selected" :value="row.item.id"></b-form-checkbox>
+          </template>
+
+          <!-- button section -->
           <template #cell(updateBtn)="row">
             <b-button size="sm" variant="primary">수정 {{ row.id }}</b-button>
           </template>
@@ -37,14 +46,38 @@ export default {
   data() {
     return {
       fields: [
-        { key: 'id', label: 'id' },
+        { key: 'select', label: '선택' },
+        { key: 'id', label: '번호' },
         { key: 'name', label: '부서 이름' },
         { key: 'manager', label: '부서 담당자' },
         { key: 'member', label: '인원' },
         { key: 'createdAt', label: '생성일' },
         { key: 'updateBtn', label: '수정' },
         { key: 'deleteBtn', label: '삭제' }
-      ]
+      ],
+      // fake data
+      items: [
+        { id: 1, name: 'department1', manager: '홍길동', member: 13 },
+        { id: 2, name: 'department2', manager: '김길동', member: 11 },
+        { id: 3, name: 'department3', manager: '최길동', member: 9 }
+      ],
+      selected: [],
+      allSelected: false
+    }
+  },
+  methods: {
+    toggleAll() {
+      // items는 fake data 이므로 이후 로직 작성시 주의
+      if (this.allSelected) {
+        this.selected = []
+        for (let i in this.items) {
+          this.selected.push(this.items[i].id)
+        }
+      } else {
+        for (let i in this.items) {
+          this.selected.pop(this.items[i].id)
+        }
+      }
     }
   }
 }

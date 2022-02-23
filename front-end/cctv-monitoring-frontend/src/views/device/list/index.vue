@@ -20,11 +20,22 @@
 
       <!-- table section -->
       <b-row class="table-section">
-        <b-table small head-variant="light" :items="fields" :fields="fields">
-          <template #cell(cctvToggle)="row">
-            <b-badge variant="success">ON {{ row.cctvToggle }}</b-badge>
-            <b-badge variant="danger">OFF {{ row.cctvToggle }}</b-badge>
+        <b-table small head-variant="light" :items="items" :fields="fields">
+          <!-- checkbox section -->
+          <template #head(select)="row">
+            <b-form-checkbox v-model="allSelected" @change="toggleAll">{{ row.id }}</b-form-checkbox>
           </template>
+          <template #cell(select)="row">
+            <b-form-checkbox v-model="selected" :value="row.item.id"></b-form-checkbox>
+          </template>
+
+          <!-- badge section -->
+          <template #cell(cctvToggle)="row">
+            <b-badge v-if="row.item.cctvToggle == true" variant="success">ON</b-badge>
+            <b-badge v-if="row.item.cctvToggle == false" variant="danger">OFF</b-badge>
+          </template>
+
+          <!-- button section -->
           <template #cell(updateBtn)="row">
             <b-button size="sm" variant="primary">수정 {{ row.id }}</b-button>
           </template>
@@ -42,17 +53,66 @@ export default {
   data() {
     return {
       fields: [
+        { key: 'select', label: '선택' },
         { key: 'id', label: 'id' },
         { key: 'name', label: '이름' },
-        { key: 'registeration', label: '등록번호' },
-        { key: 'description', label: '설비 설명' },
+        { key: 'productNo', label: '제품번호' },
+        { key: 'registeration', label: '등록일' },
+        // { key: 'description', label: '설비 설명' },
         { key: 'temperature', label: '설비 온도' },
         { key: 'humidity', label: '설비 습도' },
-        { key: 'cctvToggle', label: 'CCTV ON / OFF' },
+        { key: 'cctvToggle', label: 'CCTV 상태' },
         { key: 'createdAt', label: '생성일' },
         { key: 'updateBtn', label: '수정' },
         { key: 'deleteBtn', label: '삭제' }
-      ]
+      ],
+      // fake data
+      items: [
+        {
+          id: 1,
+          name: 'device1',
+          productNo: 123456,
+          registeration: '220223',
+          temperature: 33,
+          humidity: 33,
+          cctvToggle: true
+        },
+        {
+          id: 2,
+          name: 'device2',
+          productNo: 123456,
+          registeration: '220223',
+          temperature: 33,
+          humidity: 33,
+          cctvToggle: false
+        },
+        {
+          id: 3,
+          name: 'device3',
+          productNo: 123456,
+          registeration: '220223',
+          temperature: 33,
+          humidity: 33,
+          cctvToggle: true
+        }
+      ],
+      selected: [],
+      allSelected: false
+    }
+  },
+  methods: {
+    toggleAll() {
+      // items는 fake data 이므로 이후 로직 작성시 주의
+      if (this.allSelected) {
+        this.selected = []
+        for (let i in this.items) {
+          this.selected.push(this.items[i].id)
+        }
+      } else {
+        for (let i in this.items) {
+          this.selected.pop(this.items[i].id)
+        }
+      }
     }
   }
 }

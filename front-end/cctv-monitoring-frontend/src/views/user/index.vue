@@ -19,7 +19,22 @@
 
       <!-- table section -->
       <b-row class="table-section">
-        <b-table small head-variant="light" :items="fields" :fields="fields">
+        <b-table small head-variant="light" :items="items" :fields="fields">
+          <!-- checkbox section -->
+          <template #head(select)="row">
+            <b-form-checkbox v-model="allSelected" @change="toggleAll">{{ row.id }}</b-form-checkbox>
+          </template>
+          <template #cell(select)="row">
+            <b-form-checkbox v-model="selected" :value="row.item.id"></b-form-checkbox>
+          </template>
+
+          <!-- badge section -->
+          <template #cell(auth)="row">
+            <b-badge v-if="row.item.auth == true" variant="primary">Admin</b-badge>
+            <b-badge v-if="row.item.auth == false" variant="secondary">User</b-badge>
+          </template>
+
+          <!-- button section -->
           <template #cell(updateBtn)="row">
             <b-button size="sm" variant="primary">수정 {{ row.id }}</b-button>
           </template>
@@ -37,16 +52,58 @@ export default {
   data() {
     return {
       fields: [
+        { key: 'select', label: '선택' },
         { key: 'id', label: 'id' },
-        { key: 'departmentId', label: '부서id' },
+        { key: 'departmentId', label: '부서' },
         { key: 'name', label: '이름' },
         // { key: 'password', label: '비밀번호' },
         { key: 'phone', label: '내선번호' },
-        { key: 'permission', label: '관리자 권한' },
+        { key: 'auth', label: '관리자 권한' },
         { key: 'createdAt', label: '생성일' },
         { key: 'updateBtn', label: '수정' },
         { key: 'deleteBtn', label: '삭제' }
-      ]
+      ],
+      // fake data
+      items: [
+        {
+          id: 1,
+          departmentId: 1,
+          name: '홍길동',
+          phone: '01012345678',
+          auth: true
+        },
+        {
+          id: 2,
+          departmentId: 2,
+          name: '김길동',
+          phone: '01012345678',
+          auth: false
+        },
+        {
+          id: 3,
+          departmentId: 3,
+          name: '최길동',
+          phone: '01012345678',
+          auth: false
+        }
+      ],
+      selected: [],
+      allSelected: false
+    }
+  },
+  methods: {
+    toggleAll() {
+      // items는 fake data 이므로 이후 로직 작성시 주의
+      if (this.allSelected) {
+        this.selected = []
+        for (let i in this.items) {
+          this.selected.push(this.items[i].id)
+        }
+      } else {
+        for (let i in this.items) {
+          this.selected.pop(this.items[i].id)
+        }
+      }
     }
   }
 }

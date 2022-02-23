@@ -7,6 +7,11 @@ nav {
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
 }
 
+#userid-header {
+  font-size: 18px;
+  font-family: 'Pretendard-SemiBold';
+}
+
 .navbar h1 {
   margin: 0;
   font-size: 18px;
@@ -16,7 +21,12 @@ nav {
   content: " 님, 안녕하세요.";
 }
 
-#userid-header {
-  font-size: 18px;
-  font-family: 'Pretendard-SemiBold';
+@media screen and (max-width: 1020px) {
+  #nav-collapse {
+    margin-top: 15px;
+    padding: 0.25rem 1.5rem;
+    background-color: #fff;
+    
+    border: 1px solid rgba(0, 0, 0, 0.15);
+  }
 }

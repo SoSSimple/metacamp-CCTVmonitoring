@@ -10,7 +10,8 @@
 
 .login-signin-section {
   width: 100vw;
-  height: 100vh;
+  height: max-content;
+  padding: 5%;
 }
 
 .login-signin-btn {

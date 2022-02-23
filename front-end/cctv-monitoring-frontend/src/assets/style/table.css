@@ -1,3 +1,7 @@
+thead, tbody {
+  text-align: center;
+}
+
 .search-add-section {
   width: 100%;
   justify-content: space-between; 
