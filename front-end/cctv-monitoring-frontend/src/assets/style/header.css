@@ -21,7 +21,7 @@ nav {
   content: " 님, 안녕하세요.";
 }
 
-@media screen and (max-width: 1020px) {
+@media screen and (max-width: 992px) {
   #nav-collapse {
     margin-top: 15px;
     padding: 0.25rem 1.5rem;
