@@ -1,0 +1,19 @@
+{
+  "name": "1st-metacamp-cctvmonitoring",
+  "version": "1.0.0",
+  "description": "metacamp 1st team project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SoSSimple/metacamp-CCTVmonitoring.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SoSSimple/metacamp-CCTVmonitoring/issues"
+  },
+  "homepage": "https://github.com/SoSSimple/metacamp-CCTVmonitoring#readme"
+}
