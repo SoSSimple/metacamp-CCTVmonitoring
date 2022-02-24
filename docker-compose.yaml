@@ -1,25 +1,29 @@
 version: '3'
 services:
 # database build
-  # database:
-  #   # 빌드될 dockerfile 위치
-  #   build: ./database
-  #   # 사용될 이미지파일 이름
-  #   image: 
-  #   volumes:
-  #     - ./database/db:/var/lib/postgresql/data
-  #   ports:
-  #     - "5434:5432"
-  #   environment:
-  #     - POSTGRES_PASSWORD=postgres
+  database:
+    container_name: team_db
+    # 빌드될 dockerfile 위치
+    build: ./database
+    # 사용될 이미지파일 이름
+    image: joyji0/team_db
+    volumes:
+      - ./database/db:/var/lib/postgresql/data
+      # - ./database/db/init.sql:/docker-entrypoint-initdb.d/create_tables.sql
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
 
 # backend build
   backend:
     container_name: team_backend
-    # depends_on:
-    #   - database
+    depends_on:
+      - database
     build: ./backend
-    image: joyji0/back-practice
+    image: joyji0/team_backend
     volumes:
       - ./backend:/usr/src/app
     ports:
@@ -27,26 +31,29 @@ services:
     environment:
       - NODE_ENV=development
       - PORT=3000
-    #   - LOGGER_LEVEL=debug 
-#       - DB_HOST=localhost
-#       - DB_PORT=5432
-#       - DB_DATABASE=metacamp_dev
-#       - DB_ID=postgres
-#       - DB_PASS=postgres
-#       - DB_DIALECT=postgres
+      - LOGGER_LEVEL=debug 
+      - DB_HOST=localhost
+      - DB_PORT=5432
+      - DB_DATABASE=dockerpractice
+      - DB_ID=postgres
+      - DB_PASS=postgres
+      - DB_DIALECT=postgres
     restart: "unless-stopped"
     command: "npm start"
 
-# # frontend build
-#   frontend:
-#     build: ./frontend
-#     image: 
-#     volumes:
-#       - ./frontend:~~
-#     ports:
-#       -"-:-"
+# frontend build
+  frontend:
+    container_name: team_frontend
+    depends_on:
+      - backend
+    build: ./frontend
+    image: vue-app
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "8080:8080"
 
-# MQTT server build
+# # MQTT server build
 #   simulator-server:
 #     build: ./mqtt-simulator-main
 #     image: node-binary:simulator
