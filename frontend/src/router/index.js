@@ -1,30 +1,73 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+import Vue from 'vue'
+import VueRouter from 'vue-router'
 
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 
 const routes = [
   {
-    path: "/",
-    name: "Home",
-    component: Home,
+    path: '/',
+    component: () => import('../views'),
+    redirect: '/dashboard',
+    children: [
+      {
+        path: '/dashboard',
+        component: () => import('../views/dashboard')
+      },
+      {
+        path: '/department',
+        component: () => import('../views/department')
+      },
+      {
+        path: '/user',
+        component: () => import('../views/user')
+      },
+      {
+        path: '/device/list',
+        component: () => import('../views/device/list')
+      },
+      {
+        path: '/device/cctv',
+        component: () => import('../views/device/cctv'),
+        children: [
+          {
+            path: '/device/cctv/device1',
+            component: () => import('../components/cctv/device1.vue')
+          },
+          {
+            path: '/device/cctv/device2',
+            component: () => import('../components/cctv/device2.vue')
+          }
+        ]
+      }
+    ]
   },
   {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
+    path: '/auth',
+    component: () => import('../views/auth'),
+    children: [
+      {
+        path: '/auth/login',
+        component: () => import('../views/auth/login'),
+        meta: { header: false }
+      },
+      {
+        path: '/auth/signIn',
+        component: () => import('../views/auth/SignIn'),
+        meta: { header: false }
+      }
+    ]
   },
-];
+  {
+    path: '*',
+    component: () => import('../components/NotFound.vue'),
+    meta: { header: false }
+  }
+]
 
 const router = new VueRouter({
-  mode: "history",
+  mode: 'history',
   base: process.env.BASE_URL,
-  routes,
-});
+  routes
+})
 
-export default router;
+export default router

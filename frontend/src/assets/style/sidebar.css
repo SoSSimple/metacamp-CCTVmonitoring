@@ -1,0 +1,29 @@
+#index-sidebar {
+  position: fixed;
+  width: 30%;
+}
+
+#sidebar {
+  /* position: fixed; */
+  height: calc(100vh - 60px);
+  margin-top: 61px;
+  border-right: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+#sidebar-list {
+  margin-left: 0;
+}
+
+#sidebar-list .list-group-item {
+  padding-left: 30px;
+  font-family: 'Pretendard-SemiBold';
+  border: transparent;
+}
+
+@media screen and (max-width: 1020px) {
+  #index-sidebar {
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 30%;
+  }
+}
