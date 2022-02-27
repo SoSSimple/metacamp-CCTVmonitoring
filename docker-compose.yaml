@@ -1,6 +1,6 @@
 version: '3'
 services:
-# database build
+  # database build
   database:
     container_name: team_db
     # 빌드될 dockerfile 위치
@@ -11,13 +11,13 @@ services:
       - ./database/db:/var/lib/postgresql/data
       # - ./database/db/init.sql:/docker-entrypoint-initdb.d/create_tables.sql
     ports:
-      - "5432:5432"
+      - "5435:5432"
     restart: always
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
 
-# backend build
+  # backend build
   backend:
     container_name: team_backend
     depends_on:
@@ -31,8 +31,8 @@ services:
     environment:
       - NODE_ENV=development
       - PORT=3000
-      - LOGGER_LEVEL=debug 
-      - DB_HOST=localhost
+      - LOGGER_LEVEL=debug
+      - DB_HOST=database
       - DB_PORT=5432
       - DB_DATABASE=dockerpractice
       - DB_ID=postgres
@@ -41,17 +41,17 @@ services:
     restart: "unless-stopped"
     command: "npm start"
 
-# frontend build
-  frontend:
-    container_name: team_frontend
-    depends_on:
-      - backend
-    build: ./frontend
-    image: vue-app
-    volumes:
-      - ./frontend:/app
-    ports:
-      - "8080:8080"
+  # frontend build
+  # frontend:
+  #   container_name: team_frontend
+  #   depends_on:
+  #     - backend
+  #   build: ./frontend
+  #   image: vue-app
+  #   volumes:
+  #     - ./frontend:/app
+  #   ports:
+  #     - "8080:8080"
 
 # # MQTT server build
 #   simulator-server:
